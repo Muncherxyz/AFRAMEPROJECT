@@ -4,6 +4,7 @@
       <meta charset="utf-8">
       <title>WebAR - WIP</title>
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+     <script src="https://unpkg.com/aframe-animation-component@5.1.2/dist/aframe-animation-component.min.js"></script>
     <script>
     AFRAME.registerComponent('follow-shadow', {
       schema: {type: 'selector'},
@@ -16,6 +17,18 @@
       }
     });
   </script>
+          <script>
+      <!-- THIS MY EVENT LISTENER FOR THE URL-->
+      AFRAME.registerComponent('open-url', {
+        schema: {url: {default: ''}},
+        init: function() {
+          this.el.addEventListener('click', () => {
+            window.location.href = this.data.url;
+            event.stopPropagation();
+          });
+        }
+      });
+    </script>
   </head>
   <body>
     <a-scene>
@@ -25,6 +38,12 @@
             <img id="Test" src="Assets/Images/Personal%20Web%20AR%20Page%201.png">
             <img id="WebARPersonalPG2" src="Assets/Images/Personal%20Web%20AR%20Page%202.png">
             <img id="WebARPersonalPG3" src="Assets/Images/Personal%20Web%20AR%20Page%203-1.png">
+            <img id="floor" src="Assets/Images/TCom_Wall_Stone3_2x2_1K_ao.png">
+            <img id="cartoonySky" src="Assets/Images/Skybox.jpg">
+            <img id="middayBox" src="Assets/Images/SKYBOX2.jpg">
+            <img id="equirect" src="Assets/Images/152196899_97aee63388_c.jpg">
+            <img id="nightSky" src="Assets/Images/shack-cantley-night-sky.jpg">
+            
             
             <!-- Audio -->
             <audio id="Lofi" src="Assets/Audio/cold-brew-ra-main-version-29719-02-38.mp3"></audio>
@@ -37,6 +56,11 @@
                 <a-cursor></a-cursor>
             </a-camera>
         </a-entity>
+        <a-sky src="#nightSky"
+               side="double"
+               radius="100"
+               animation="property: rotation; to: 0 360 0; dur: 50000; loop:true">
+        </a-sky>
         
         <a-sound src="#Lofi" autoplay="true"></a-sound>
         
@@ -49,8 +73,8 @@
                        theta-start="90"
                        radius="0.707"
                        height="0.644"
-                       position="0 1.5 0"
-                       scale="3 3 3">
+                       position="0 3.5 0"
+                       scale="10 10 10">
         </a-curvedimage>
         
         <!-- Center curved image -->        
@@ -59,8 +83,8 @@
                        theta-start="155"
                        radius="0.707"
                        height="0.644"
-                       position="0 1.5 0"
-                       scale="3 3 3">
+                       position="0 3.5 0"
+                       scale="10 10 10">
         </a-curvedimage>
         <!-- Left Curved Image -->
         <a-curvedimage src="#WebARPersonalPG3"
@@ -68,17 +92,32 @@
                        theta-start="220"
                        radius="0.707"
                        height="0.644"
-                       position="0 1.5 0"
-                       scale="3 3 3">
-            <a-circle scale=".1 .1 .1">
-            </a-circle>
+                       position="0 3.5 0"
+                       scale="10 10 10">
+            
         </a-curvedimage>
         
-        <a-box color="#689F38"
-               width="8"
-               height=".2"
-               position="0 1.5 0">
+        <a-plane material="color: #999999;
+                           src: #floor;
+                           repeat: 50 50"
+                 rotation="-90 0 0"
+                 scale="100 100 2">
+        </a-plane>
+        
+        <a-box color="#ABCDEF"
+               scale="5 5 5"
+               position="0 10 0"
+               animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+
         </a-box>
+        
+         <a-box position="-4 1 0" rotation="0 45 0" color="#CC3333" depth="3" height="1" width="2"
+              open-url="url: https://github.com/Muncherxyz">
+        </a-box>
+        <a-circle scale=".14 .14 .14" position="-6.16 1.6 -3.4" rotation="0 56.210 0" color="#CC3333" depth="3" height="1" width="2"
+              open-url="url: https://www.linkedin.com/in/kortlan-blocker-2673il">
+            <a-image src="#Test"></a-image>
+        </a-circle>
                        
         
         
